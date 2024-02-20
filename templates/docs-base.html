@@ -29,18 +29,34 @@
 
 {% block mobile_page_menu %}
     {% if section and section.components %}
-        {% set root_section_path = section.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% if current_path is starting_with("/learn/book") %}
+            {% set root_section_path = section.components | slice(end=3) | concat(with="_index.md") | join(sep="/") %}
+        {% else %}
+            {% set root_section_path = section.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% endif %}
     {% elif page and page.components %}
-        {% set root_section_path = page.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% if current_path is starting_with("/learn/book") %}
+            {% set root_section_path = page.components | slice(end=3) | concat(with="_index.md") | join(sep="/") %}
+        {% else %}
+            {% set root_section_path = page.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% endif %}
     {% endif %}
     {{ docs_macros::docs_menu(prefix="mobile-menu", root=get_section(path=root_section_path)) }}
 {% endblock %}
 
 {% block page_menu %}
     {% if section and section.components %}
-        {% set root_section_path = section.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% if current_path is starting_with("/learn/book") %}
+            {% set root_section_path = section.components | slice(end=3) | concat(with="_index.md") | join(sep="/") %}
+        {% else %}
+            {% set root_section_path = section.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% endif %}
     {% elif page and page.components %}
-        {% set root_section_path = page.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% if current_path is starting_with("/learn/book") %}
+            {% set root_section_path = page.components | slice(end=3) | concat(with="_index.md") | join(sep="/") %}
+        {% else %}
+            {% set root_section_path = page.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+        {% endif %}
     {% endif %}
     {{ docs_macros::docs_menu(prefix="page-menu", root=get_section(path=root_section_path)) }}
 {% endblock %}
@@ -49,9 +65,17 @@
 <div class="docs-page">
     <div class="docs-content">
         {% if section and section.components %}
-            {% set root_section_path = section.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+            {% if current_path is starting_with("/learn/book") %}
+                {% set root_section_path = section.components | slice(end=3) | concat(with="_index.md") | join(sep="/") %}
+            {% else %}
+                {% set root_section_path = section.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+            {% endif %}
         {% elif page and page.components %}
-            {% set root_section_path = page.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+            {% if current_path is starting_with("/learn/book") %}
+                {% set root_section_path = page.components | slice(end=3) | concat(with="_index.md") | join(sep="/") %}
+            {% else %}
+                {% set root_section_path = page.components | slice(end=2) | concat(with="_index.md") | join(sep="/") %}
+            {% endif %}
         {% endif %}
         {% set root_section = get_section(path=root_section_path) %}
         {# Create an array of sections and pages in reading order #}

@@ -1,10 +1,7 @@
 +++
-title = "Book"
-template = "docs-section.html"
-page_template = "docs-page.html"
-insert_anchor_links = "right"
-redirect_to = "learn/book/getting-started"
+title = "Bevy Book"
+redirect_to = "/learn/book/latest"
 [extra]
-status = 'hidden'
+status = "hidden"
 public_draft = 874
 +++
