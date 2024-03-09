@@ -1,4 +1,4 @@
-# Bevy Website
+# Bevy Websites
 
 The source files for <https://bevyengine.org>. This includes official Bevy news, docs, and interactive examples.
 
