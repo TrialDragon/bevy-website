@@ -1,17 +1,12 @@
 [package]
 name = "generate-community"
 version = "0.1.0"
-authors = [
-  "Bevy Contributors <bevyengine@gmail.com>",
-]
-license = "MIT"
 edition = "2021"
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [dependencies]
-serde = { version = "1", features = ["derive"] }
-toml = "0.5"
-rand = "0.8"
-unicode-segmentation = "1.10"
+anyhow = "1.0.81"
 
 [lints]
 workspace = true

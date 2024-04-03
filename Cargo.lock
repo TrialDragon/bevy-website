@@ -257,9 +257,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.80"
+version = "1.0.81"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ad32ce52e4161730f7098c077cd2ed6229b5804ccf99e5366be1ab72a98b4e1"
+checksum = "0952808a6c2afd1aa8947271f3a60f1a6763c7b912d210184c5149b5cf147247"
 
 [[package]]
 name = "approx"
@@ -1391,7 +1391,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "599aa35200ffff8f04c1925aa1acc92fa2e08874379ef42e210a80e527e60838"
 dependencies = [
  "serde",
- "toml 0.7.8",
+ "toml",
 ]
 
 [[package]]
@@ -2231,7 +2231,7 @@ dependencies = [
  "rand",
  "regex",
  "serde",
- "toml 0.7.8",
+ "toml",
  "ureq",
  "url",
 ]
@@ -2240,10 +2240,7 @@ dependencies = [
 name = "generate-community"
 version = "0.1.0"
 dependencies = [
- "rand",
- "serde",
- "toml 0.5.11",
- "unicode-segmentation",
+ "anyhow",
 ]
 
 [[package]]
@@ -4504,15 +4501,6 @@ dependencies = [
  "pin-project-lite",
  "tokio",
  "tracing",
-]
-
-[[package]]
-name = "toml"
-version = "0.5.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4f7f0dd8d50a853a531c426359045b1998f04219d88799810762cd4ad314234"
-dependencies = [
- "serde",
 ]
 
 [[package]]
