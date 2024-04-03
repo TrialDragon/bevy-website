@@ -21,7 +21,9 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
     for entry in folder_path.read_dir()? {
         let entry = entry?;
 
-        if entry.file_type()?.is_dir() {
+        if entry.file_type()?.is_dir() || if let Some(extension) = entry.path().extension() {
+            extension != "toml"
+        } else { true } {
             continue;
         }
 
@@ -82,5 +84,35 @@ github = "ExampleTwo"
         // even on (most) failing tests.
         fs::remove_dir_all(test_folder_path).unwrap();
         assert_eq!(result.unwrap(), expected.to_string());
+    }
+
+    #[test]
+    fn only_parses_toml_files() {
+        let test_folder_path = Path::new("parsing_test_folder");
+        let example_member = r#"name = "example"
+bio = "example stuff"
+sponsor = "sponsor_link.example"
+github = "ExampleOne"
+"#;
+        let fake_file = r#"THIS SHOULDN'T BE PARSED!!!"#;
+        let expected = r#"[[members]]
+name = "example"
+bio = "example stuff"
+sponsor = "sponsor_link.example"
+github = "ExampleOne"
+"#;
+        fs::create_dir_all(test_folder_path).unwrap();
+        fs::write(test_folder_path.join("test.toml"), example_member).unwrap();
+        fs::write(test_folder_path.join("fake.svg"), fake_file).unwrap();
+
+        let result = collect_member_files(test_folder_path);
+
+        // Clean up the test folder.
+        // This happens before the assert statement
+        // to ensure things are cleaned up
+        // even on (most) failing tests.
+        fs::remove_dir_all(test_folder_path).unwrap();
+        assert_eq!(result.unwrap(), expected.to_string());
+        
     }
 }
