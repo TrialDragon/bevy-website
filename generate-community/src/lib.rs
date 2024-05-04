@@ -42,6 +42,14 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
     Ok(collected_members)
 }
 
+/// Copies files with picture related extensions
+/// to the new folder so that users' profile pictures
+/// are available for the community template to use.
+pub fn copy_profile_pictures(origin_folder: &Path, destination_folder: &Path) -> anyhow::Result<()> {
+
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use std::{fs, path::Path};
@@ -113,6 +121,31 @@ github = "ExampleOne"
         // even on (most) failing tests.
         fs::remove_dir_all(test_folder_path).unwrap();
         assert_eq!(result.unwrap(), expected.to_string());
+        
+    }
+
+    #[test]
+    fn copies_profile_pictures() {
+        let test_folder_path = Path::new("pictures_test_folder");
+        let result_folder_path = Path::new("result_folder");
+        let example_member = r#"name = "example"
+bio = "example stuff"
+sponsor = "sponsor_link.example"
+github = "ExampleOne"
+"#;
+        let test_pfp = "This is not an actual image";
+
+        fs::create_dir_all(test_folder_path).unwrap();
+        fs::write(test_folder_path.join("test.toml"), example_member).unwrap();
+        fs::write(test_folder_path.join("fake.png"), test_pfp).unwrap();
+
+        copy_profile_pictures(test_folder_path, result_folder_path).unwrap();
+
+        let result_one = fs::read_to_string(result_folder_path.join("fake.png")).unwrap();
+        let result_two = fs::read_to_string(result_folder_path.join("test.toml"));
+
+        assert!(result_two.is_err());
+        assert_eq!(result_one, test_pfp);
         
     }
 }
