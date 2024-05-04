@@ -182,6 +182,10 @@ github = "ExampleOne"
         let result_one = fs::read_to_string(result_folder_path.join("fake.png")).unwrap();
         let result_two = fs::read_to_string(result_folder_path.join("test.toml"));
 
+        // Clean up.
+        fs::remove_dir_all(test_folder_path).unwrap();
+        fs::remove_dir_all(result_folder_path).unwrap();
+
         assert!(result_two.is_err());
         assert_eq!(result_one, test_pfp);
     }
