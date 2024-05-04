@@ -27,6 +27,11 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
             } else {
                 true
             }
+            || if let Some(file_stem) = entry.path().file_stem() {
+                file_stem == "_category"
+            } else {
+                false
+            }
         {
             continue;
         }
