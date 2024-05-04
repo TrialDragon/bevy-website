@@ -21,9 +21,13 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
     for entry in folder_path.read_dir()? {
         let entry = entry?;
 
-        if entry.file_type()?.is_dir() || if let Some(extension) = entry.path().extension() {
-            extension != "toml"
-        } else { true } {
+        if entry.file_type()?.is_dir()
+            || if let Some(extension) = entry.path().extension() {
+                extension != "toml"
+            } else {
+                true
+            }
+        {
             continue;
         }
 
@@ -45,7 +49,41 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
 /// Copies files with picture related extensions
 /// to the new folder so that users' profile pictures
 /// are available for the community template to use.
-pub fn copy_profile_pictures(origin_folder: &Path, destination_folder: &Path) -> anyhow::Result<()> {
+pub fn copy_profile_pictures(
+    origin_folder: &Path,
+    destination_folder: &Path,
+) -> anyhow::Result<()> {
+    if !origin_folder.try_exists()? {
+        anyhow::bail!("The origin folder {origin_folder:?} doesn't exist");
+    }
+
+    if !destination_folder.try_exists()? {
+        anyhow::bail!("The destination folder {destination_folder:?} doesn't exist");
+    }
+
+    
+    for dir_entry in origin_folder.read_dir()? {
+        let dir_entry = dir_entry?;
+        let path = dir_entry.path();
+        let Some(extension) = path.extension() else {
+            continue;
+        };
+
+        if extension == "png"
+            || extension == "svg"
+            || extension == "jpg"
+            || extension == "jpeg"
+            || extension == "webp"
+        {
+            fs::write(
+                destination_folder.join(path.file_name().ok_or(anyhow::anyhow!(
+                    "This path's file name terminates in '...': {:?}",
+                    path
+                ))?),
+                fs::read(path)?,
+            )?;
+        }
+    }
 
     Ok(())
 }
@@ -121,7 +159,6 @@ github = "ExampleOne"
         // even on (most) failing tests.
         fs::remove_dir_all(test_folder_path).unwrap();
         assert_eq!(result.unwrap(), expected.to_string());
-        
     }
 
     #[test]
@@ -136,6 +173,7 @@ github = "ExampleOne"
         let test_pfp = "This is not an actual image";
 
         fs::create_dir_all(test_folder_path).unwrap();
+        fs::create_dir_all(result_folder_path).unwrap();
         fs::write(test_folder_path.join("test.toml"), example_member).unwrap();
         fs::write(test_folder_path.join("fake.png"), test_pfp).unwrap();
 
@@ -146,6 +184,5 @@ github = "ExampleOne"
 
         assert!(result_two.is_err());
         assert_eq!(result_one, test_pfp);
-        
     }
 }
