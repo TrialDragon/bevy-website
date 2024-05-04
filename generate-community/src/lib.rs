@@ -162,9 +162,9 @@ github = "ExampleOne"
     }
 
     #[test]
-    fn copies_profile_pictures() {
+    fn copies_profile_picture() {
         let test_folder_path = Path::new("pictures_test_folder");
-        let result_folder_path = Path::new("result_folder");
+        let result_folder_path = Path::new("pictures_result_folder");
         let example_member = r#"name = "example"
 bio = "example stuff"
 sponsor = "sponsor_link.example"
@@ -188,5 +188,43 @@ github = "ExampleOne"
 
         assert!(result_two.is_err());
         assert_eq!(result_one, test_pfp);
+    }
+
+    #[test]
+    fn copy_works_with_multiple_types_of_pictures() {
+        let test_folder_path = Path::new("multi_pictures_test_folder");
+        let result_folder_path = Path::new("multi_pictures_result_folder");
+        let example_member = r#"name = "example"
+bio = "example stuff"
+sponsor = "sponsor_link.example"
+github = "ExampleOne"
+"#;
+        let test_pfp = "This is not an actual image";
+
+        fs::create_dir_all(test_folder_path).unwrap();
+        fs::create_dir_all(result_folder_path).unwrap();
+        fs::write(test_folder_path.join("test.toml"), example_member).unwrap();
+        fs::write(test_folder_path.join("fake_one.png"), test_pfp).unwrap();
+        fs::write(test_folder_path.join("fake_two.svg"), test_pfp).unwrap();
+        fs::write(test_folder_path.join("fake_three.jpg"), test_pfp).unwrap();
+        fs::write(test_folder_path.join("fake_four.webp"), test_pfp).unwrap();
+
+        copy_profile_pictures(test_folder_path, result_folder_path).unwrap();
+
+        let result_one = fs::read_to_string(result_folder_path.join("fake_one.png")).unwrap();
+        let result_two = fs::read_to_string(result_folder_path.join("fake_two.svg")).unwrap();
+        let result_three = fs::read_to_string(result_folder_path.join("fake_three.jpg")).unwrap();
+        let result_four = fs::read_to_string(result_folder_path.join("fake_four.webp")).unwrap();
+        let result_five = fs::read_to_string(result_folder_path.join("test.toml"));
+
+        // Clean up.
+        fs::remove_dir_all(test_folder_path).unwrap();
+        fs::remove_dir_all(result_folder_path).unwrap();
+
+        assert!(result_five.is_err());
+        assert_eq!(result_one, test_pfp);
+        assert_eq!(result_two, test_pfp);
+        assert_eq!(result_three, test_pfp);
+        assert_eq!(result_four, test_pfp);
     }
 }
