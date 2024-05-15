@@ -43,6 +43,7 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
 
     for member_file_path in member_file_paths {
         let member_file_content = fs::read_to_string(member_file_path)?;
+        collected_members.push('\n');
         collected_members.push_str("[[members]]");
         collected_members.push('\n');
         collected_members.push_str(&member_file_content);
