@@ -42,9 +42,11 @@ fn main() -> anyhow::Result<()> {
     );
     fs::write(&args.output_file, member_file)?;
 
-    println!("Copying members' profile pictures to {} . . .", args.pictures_output_folder.to_string_lossy());
+    println!(
+        "Copying members' profile pictures to {} . . .",
+        args.pictures_output_folder.to_string_lossy()
+    );
     copy_profile_pictures(&args.input_folder, &args.pictures_output_folder)?;
-
 
     Ok(())
 }
