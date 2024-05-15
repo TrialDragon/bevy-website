@@ -43,6 +43,7 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
 
     for member_file_path in member_file_paths {
         let member_file_content = fs::read_to_string(member_file_path)?;
+        let member_file_content = clean_member_file(&member_file_content);
         collected_members.push('\n');
         collected_members.push_str("[[members]]");
         collected_members.push('\n');
@@ -50,6 +51,16 @@ pub fn collect_member_files(folder_path: &Path) -> anyhow::Result<String> {
     }
 
     Ok(collected_members)
+}
+
+/// Cleans up kebab case in TOML variable names
+/// since Zola can't seem to properly handle them.
+fn clean_member_file(member_file_content: &str) -> String {
+    member_file_content
+        .replace("profile-picture", "profile_picture")
+        .replace("discord-userid", "discord_userid")
+        .replace("itch-io", "itch_io")
+        .replace("steam-developer", "steam_developer")
 }
 
 /// Copies files with picture related extensions
@@ -67,7 +78,6 @@ pub fn copy_profile_pictures(
         anyhow::bail!("The destination folder {destination_folder:?} doesn't exist");
     }
 
-    
     for dir_entry in origin_folder.read_dir()? {
         let dir_entry = dir_entry?;
         let path = dir_entry.path();
