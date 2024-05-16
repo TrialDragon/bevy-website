@@ -6,8 +6,12 @@ content/assets/
 content/learn/errors/
 content/examples/
 content/examples-webgpu/
-content/community/people/
-content/community/donate/
+content/community/people/*.toml
+content/community/people/*.png
+content/community/people/*.svg
+content/community/people/*.jpg
+content/community/people/*.jpeg
+content/community/people/*.webp
 static/assets/examples/
 static/processed_images/
 

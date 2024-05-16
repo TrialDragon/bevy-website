@@ -1,0 +1,135 @@
+{% macro people_cards(people_data_path) %}
+  {% set roles = load_data(path="@/community/people/_roles.toml") %}
+  {% set people_data = load_data(path=people_data_path) %}
+  <div class="item-grid item-grid--multi-cols">
+    {% for person in people_data.members %}
+    <article id="{{ person.name | slugify }}" class="card people-card">
+      <div class="card-text media-content card-dense">
+        <div class="card-title">
+          <div class="card-title__text
+            {%- if person.name | length > 30 -%}card-title__text--long
+            {%- elif person.name | length > 20 -%}card-title__text--medium
+            {%- endif -%}">
+            {{ person.name }}
+          </div>
+          {% if person.profile_picture %}
+          <div class="card-profile-picture">
+            {% if person.profile_picture is starting_with("https://") %}
+            <img src="{{ person.profile_picture }}"
+                  alt="{{ person.name }}'s profile picture"
+                  width="64"
+                  height="64" />
+            {% elif person.profile_picture == "GitHub" %}
+            <img src="https://github.com/{{ person.github }}.png"
+                  alt="{{ person.name }}'s profile picture"
+                  width="64"
+                  height="64" />
+            {% else %}
+            <img src="/{{ page.components | concat(with=person.profile_picture) | join(sep='/') }}"
+                  alt="{{ person.name }}'s profile picture"
+                  width="64"
+                  height="64" />
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="asset-card__small_description">
+          <ul class="people-links">
+          {% if person.github %}
+            <li><a href="https://github.com/{{ person.github }}">
+              <svg class="card-social-icon">
+                <title>{{ person.github }} on GitHub</title>
+                <use href="#github" />
+              </svg>
+            </a></li>
+          {% endif %}
+          {% if person.discord_userid %}
+            <li><a href="https://discordapp.com/users/{{ person.discord_userid }}">
+              <svg class="card-social-icon">
+                <title>{{ person.discord }} on Discord</title>
+                <use href="#discord" />
+              </svg>
+            </a></li>
+          {% endif %}
+          {% if person.mastodon %}
+            {% set mastodon_components = person.mastodon | split(pat="@") %}
+            <li><a href="https://{{ mastodon_components.2 }}/@{{ mastodon_components.1 }}">
+              <svg class="card-social-icon">
+                <title>{{ person.mastodon }}</title>
+                <use href="#mastodon" />
+              </svg>
+            </a></li>
+          {% endif %}
+          {% if person.twitter %}
+            <li><a href="https://twitter.com/{{ person.twitter }}">
+              <svg class="card-social-icon">
+                <title>{{ person.twitter }} on Twitter</title>
+                <use href="#twitter" />
+              </svg>
+            </a></li>
+          {% endif %}
+          {% if person.instagram %}
+            <li><a href="https://instagram.com/{{ person.instagram }}">
+              <svg class="card-social-icon">
+                <title>{{ person.instagram }} on Instagram</title>
+                <use href="#instagram" />
+              </svg>
+            </a></li>
+          {% endif %}
+          {% if person.itch_io %}
+            <li><a href="https://{{ person.itch_io }}.itch.io">
+              <svg class="card-social-icon">
+                <title>{{ person.itch_io}} on itch.io</title>
+                <use href="#itch-io" />
+              </svg>
+            </a></li>
+          {% endif %}
+          {% if person.steam_developer %}
+            <li><a href="https://store.steampowered.com/developer/{{ person.steam_developer }}">
+              <svg class="card-social-icon">
+                <title>{{ person.steam_developer}} on Steam</title>
+                <use href="#steam" />
+              </svg>
+            </a></li>
+          {% endif %}
+          {% if person.website %}
+            <li><a href="{{ person.website }}">
+              <svg class="card-social-icon">
+                <title>{{ person.website }}</title>
+                <use href="#globe" />
+              </svg>
+            </a></li>
+          {% endif %}
+          </ul>
+          <ul class="people-roles">
+          {% if roles.project_lead is containing(person.github) %}
+            <li class="people-role people-role-card people-role-project-lead">Project Lead</li>
+          {% endif %}
+          {% if roles.maintainer is containing(person.github) %}
+            <li class="people-role people-role-card people-role-maintainer">Maintainer</li>
+          {% endif %}
+          {% for expert in roles.sme %}
+            {% if expert.id == person.github %}
+            <li class="people-role people-role-card people-role-sme">SME-{{ expert.area }}</li>               
+            {% endif %}
+          {% endfor %}
+          </ul>
+          {% if person.bio %}
+          <p class="card-text-dense">
+            {{ person.bio }}
+          </p>
+          {% endif %}
+          {% if person.sponsor %}
+          <div class="donate-sponsor">
+            <svg class="card-social-icon card-sponsor-icon">
+              <use href="#heart" />
+            </svg>
+            <a href="{{ person.sponsor }}">Sponsor me!</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+{% endmacro people_cards %}

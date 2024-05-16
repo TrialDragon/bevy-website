@@ -28,12 +28,24 @@
   gap: 1rem;
 }
 
+.asset-card__small_description ul.people-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .people-roles {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
   margin-top: 0.3rem;
   margin-bottom: 0.4rem;
+}
+
+.asset-card__small_description ul.people-roles {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
 }
 
 .people-role {

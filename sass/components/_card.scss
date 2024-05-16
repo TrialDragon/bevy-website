@@ -25,6 +25,12 @@
   height: 1rem;
 }
 
+.card-social-icon li {
+  style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
 .card-sponsor-icon {
   fill: $color-pink;
 }
@@ -65,8 +71,8 @@
   line-height: 1.0rem;
 }
 
-.card-text-dense {
-  line-height: 1.0rem;
+p.card-text-dense {
+  margin: 0;
 }
 
 .card-subtitle {
@@ -98,6 +104,19 @@
   color: $default-color;
   font-style: normal;
   text-decoration: none;
+
+  &__text {
+    width: 210px;
+    font-size: 1.5rem;
+
+    &--long {
+      font-size: 0.5rem;
+    }
+
+    &--medium {
+      font-size: 1.0rem;
+    }
+  }
 }
 
 .card-image-default {
