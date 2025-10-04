@@ -35,6 +35,16 @@
     height: calc(100vh - var(--layout-header-height) - #{$margin-top * 2});
     overflow-y: auto;
     padding-bottom: $margin-top;
+    font-size: var(--mobile-functional-font-size);
+
+    @media #{$bp-tablet-portrait-up} {
+      font-size: var(--desktop-functional-font-size);
+    }
+
+    @media #{$bp-tablet-portrait-up} {
+      font-size: var(--desktop-functional-font-size);
+    }
+
   }
 
   &__content {

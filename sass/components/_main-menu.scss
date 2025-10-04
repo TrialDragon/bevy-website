@@ -14,7 +14,7 @@
 
     position: relative;
     height: var(--layout-header-height);
-    font-size: 1.3rem;
+    font-size: var(--mobile-header-font-size);
     font-weight: 500;
     text-decoration: none;
 
@@ -174,7 +174,7 @@
 
       padding: 0 8px;
       height: var(--layout-header-height);
-      font-size: 1.3rem;
+      font-size: var(--desktop-header-font-size);
       font-weight: 500;
       text-decoration: none;
     }

@@ -1,0 +1,7 @@
+h4 {
+  font-size: calc(var(--mobile-heading-font-size) * 0.6);
+
+  @media #{$bp-tablet-portrait-up} {
+    font-size: calc(var(--desktop-heading-font-size) * 0.5);
+  }
+}

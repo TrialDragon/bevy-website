@@ -2,6 +2,7 @@ li {
   --list-margin: 0.825em;
   max-width: var(--paragraph-width);
   margin-bottom: var(--list-margin);
+  line-height: var(--line-height);
 
   > ul,ol {
     margin-top: var(--list-margin);

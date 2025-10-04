@@ -36,7 +36,7 @@
 
   &__message {
     display: none;
-    font-size: 1.28rem;
+    font-size: var(--mobile-desktop-header-font-size);
     font-weight: 500;
     color: var(--header-message-color);
     margin-left: 12px;
@@ -47,7 +47,7 @@
     }
 
     @media #{$bp-desktop-up} {
-      font-size: 1.3rem;
+      font-size: var(--desktop-header-font-size);
     }
 
     &:empty {

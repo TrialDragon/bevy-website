@@ -57,9 +57,16 @@ $color-white: #fff;
   // Typography
   --font-family-sans: "Fira Sans", sans-serif;
   --font-family-mono: "Fira Mono", monospace;
-  --desktop-font-size: 1rem;
-  --mobile-font-size: 0.875rem;
+  --desktop-body-font-size: 1.45rem;
+  --mobile-body-font-size: 1.1rem;
+  --desktop-heading-font-size: 3.5rem;
+  --mobile-heading-font-size: 2rem;
+  --desktop-functional-font-size: 1rem;
+  --mobile-functional-font-size: 0.9rem;
+  --desktop-header-font-size: 1.3rem;
+  --mobile-header-font-size: 1.15rem;
   --paragraph-width: 66ch;
+  --line-height: 1.55em;
 
   // Neutrals by lightness
   --color-neutral-11: #1b1b1b;

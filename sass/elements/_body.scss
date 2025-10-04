@@ -1,4 +1,9 @@
 body {
   padding: 0;
   margin: 0;
+  font-size: var(--mobile-body-font-size);
+
+  @media #{$bp-tablet-portrait-up} {
+    font-size: var(--desktop-body-font-size);
+  }
 }

@@ -51,8 +51,12 @@
         min-height: $item-height;
         text-decoration: none;
         line-height: 1.35;
-        font-size: 1rem;
+        font-size: var(--mobile-functional-font-size);
         text-wrap: balance;
+
+        @media #{$bp-tablet-portrait-up} {
+          font-size: var(--desktop-functional-font-size);
+        }
 
         &, &:focus, &:active, &:hover, &:link, &:visited {
             color: var(--tree-menu-label-color);

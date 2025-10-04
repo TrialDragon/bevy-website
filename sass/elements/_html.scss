@@ -2,7 +2,6 @@ html {
   color: var(--html-text-color);
   color-scheme: dark;
   font-family: var(--font-family-sans);
-  font-size: var(--mobile-font-size);
   background-color: var(--html-bg-color);
   scroll-padding-top: var(--scroll-padding-top);
 
@@ -10,13 +9,5 @@ html {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
     outline: none;
-  }
-
-  @media #{$bp-tablet-portrait-up} {
-    font-size: var(--desktop-font-size);
-  }
-
-  @media #{$bp-tablet-portrait-up} {
-    font-size: var(--desktop-font-size);
   }
 }
