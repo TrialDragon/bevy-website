@@ -2,7 +2,7 @@ html {
   color: var(--html-text-color);
   color-scheme: dark;
   font-family: var(--font-family-sans);
-  font-size: calc-rem($size-body-mobile);
+  font-size: var(--mobile-font-size);
   background-color: var(--html-bg-color);
   scroll-padding-top: var(--scroll-padding-top);
 
@@ -13,10 +13,10 @@ html {
   }
 
   @media #{$bp-tablet-portrait-up} {
-    font-size: calc-rem($size-body);
+    font-size: var(--desktop-font-size);
   }
 
   @media #{$bp-tablet-portrait-up} {
-    font-size: calc-rem($size-body);
+    font-size: var(--desktop-font-size);
   }
 }

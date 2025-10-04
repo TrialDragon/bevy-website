@@ -5,10 +5,6 @@ is needed if you want to use variables
 with things like media queries.
 */
 
-// Typography
-$size-body: 16px; // Usual browser default size
-$size-body-mobile: 14px; // Size for mobile
-
 // Breakpoints
 $bp-phone-landscape: 480px; // Mobile-landscape (and larger)
 $bp-tablet-portrait: 768px; // Tablet-portrait (and larger)
@@ -62,6 +58,8 @@ $color-white: #fff;
   // Typography
   --font-family-sans: "Fira Sans", sans-serif;
   --font-family-mono: "Fira Mono", monospace;
+  --desktop-font-size: 1rem;
+  --mobile-font-size: 0.875rem;
 
   // Neutrals by lightness
   --color-neutral-11: #1b1b1b;
