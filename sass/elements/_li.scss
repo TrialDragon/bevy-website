@@ -1,3 +1,13 @@
 li {
+  --list-margin: 1.25em;
   max-width: $paragraph-width;
+  margin-bottom: var(--list-margin);
+
+  > ul,ol {
+    margin-top: var(--list-margin);
+  }
+}
+
+nav li {
+  margin: 0;
 }
