@@ -1,3 +1,10 @@
+/* Why SASS Variables?
+SASS variables can exist outside of elements,
+acting as a sort of global variable. This
+is needed if you want to use variables
+with things like media queries.
+*/
+
 // Typography
 $size-body: 16px; // Usual browser default size
 $size-body-mobile: 14px; // Size for mobile
