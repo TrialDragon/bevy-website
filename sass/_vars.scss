@@ -31,7 +31,6 @@ $z-main-menu: 1000;
 
 // General
 $max-width: 1200px;
-$paragraph-width: 66ch;
 $mobile-menu-width: 300px;
 $content-top-margin: 30px;
 $border-radius: 10px;
@@ -60,6 +59,7 @@ $color-white: #fff;
   --font-family-mono: "Fira Mono", monospace;
   --desktop-font-size: 1rem;
   --mobile-font-size: 0.875rem;
+  --paragraph-width: 66ch;
 
   // Neutrals by lightness
   --color-neutral-11: #1b1b1b;

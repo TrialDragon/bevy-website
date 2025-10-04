@@ -1,6 +1,6 @@
 li {
   --list-margin: 1.25em;
-  max-width: $paragraph-width;
+  max-width: var(--paragraph-width);
   margin-bottom: var(--list-margin);
 
   > ul,ol {
