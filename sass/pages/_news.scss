@@ -12,6 +12,10 @@
   font-style: italic;
   color: var(--news-subtitle-color);
 }
+.page-with-menu--news .page-with-menu__content {
+  max-width: var(--paragraph-width);
+  margin: 0px auto;
+}
 
 .news-content {
   img {
